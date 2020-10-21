@@ -19,9 +19,9 @@ function Home() {
     fetch(`${server}weather?q=${location}&units=metric&APPID=${key}`)
     .then((res) => res.json())
     .then((result) => {
+        console.log(result)
         setLocation('')
         setWeather(result)
-        console.log(result)
     })
   }
 
@@ -36,15 +36,14 @@ function Home() {
             value={location}
             onChange={ e => setLocation(e.target.value) }
           />
-          <input
-            type='submit'
-            value='Search'
-            onClick={ e => handleSearch(e) }
-          />
+          <button type="submit"
+            onClick={ e => handleSearch(e) }>
+            Search
+          </button>
         </div>
       </div>
       <div className='bottom-container'>
-      {typeof weather.main != "undefined" ? (
+      { weather.main ? (
           <div className="info-wrap">
             <div className="location-container">
               <div className="location">
