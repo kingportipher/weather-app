@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
-function Login () {
+function Login (props) {
+  const history = useHistory()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -13,6 +16,19 @@ function Login () {
     }
 
     console.log("About to Login", data)
+
+    // ...
+    // Attempt login here probably via an API
+    // ...
+    const userData = {
+      name: "David Lartey",
+      location: "Accra"
+    }
+
+    // After login, set the userData to the data of our new user
+    props.updateUser(userData)
+
+    history.push('/')
   }
 
   return (

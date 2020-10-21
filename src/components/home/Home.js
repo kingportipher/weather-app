@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
-function Home() {
+function Home(props) {
+ 
   const server = 'https://api.openweathermap.org/data/2.5/'
   const key = 'a6922589129783432b9e6268378c3da5'
 
@@ -9,6 +11,8 @@ function Home() {
     date = date.slice(3, 15)
     return date
   }
+
+  let firstName = "David"
 
   const [ location, setLocation ] = useState('')
   const [ weather, setWeather ] = useState({})
@@ -24,6 +28,20 @@ function Home() {
         setWeather(result)
     })
   }
+
+  useEffect(
+    function () {
+      let country = "Ghana"
+      fetch(`${server}weather?q=${country}&units=metric&APPID=${key}`)
+        .then((res) => res.json())
+        .then((result) => {
+          console.log(result)
+          setLocation('')
+          setWeather(result)
+        })
+    },
+    []
+  )
 
   return (
     <div className="app">
@@ -61,7 +79,19 @@ function Home() {
             </div>
           </div>
         ) : (
-          <h1 className='null-void'> Search a city to get weather details </h1>
+          <div>
+            {
+              props.userData ?
+              <h1 className='null-void'>
+                Hello {props.userData.name}, welcome to our weather app
+              </h1>
+              :
+              <h1 className='null-void'>
+                Hello, <Link to="/login">Log in</Link> to our weather app
+              </h1>
+            }
+            <h1 className='null-void'> Search a city to get weather details </h1>
+          </div>
         )}
       </div>
     </div>

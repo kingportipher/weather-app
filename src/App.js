@@ -1,20 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import Home from './components/home/Home'
 import Signup from './components/signup/Signup'
 import Login from './components/login/login'
 
 function App() {
+  const [userData, setUserData] = useState(false)
+
+  function updateLoggedInUserInfo (user) {
+    setUserData(user)
+  }
+
   return(
     <div className='app'>
       
       <Link to='/'> Home </Link>
-      <Link to='/login'> Login </Link>
-      <Link to='/signup'> Sign Up </Link>
+      {
+        userData ?
+          <button onClick={e => updateLoggedInUserInfo(false)}>
+            Logout
+          </button>
+          :
+          <div>
+            <Link to='/login'> Login </Link>
+            <Link to='/signup'> Sign Up </Link>
+          </div>
+      }
 
       <Switch>
         <Route exact path='/'>
-          <Home />
+          <Home userData={userData} />
         </Route>
 
         <Route exact path='/signup'>
@@ -22,7 +37,8 @@ function App() {
         </Route>
 
         <Route exact path='/login'>
-          <Login />
+          <Login userData={userData}
+            updateUser={updateLoggedInUserInfo} />
         </Route>
       </Switch>
 
