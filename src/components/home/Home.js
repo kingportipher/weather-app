@@ -12,20 +12,51 @@ function Home(props) {
     return date
   }
 
-  let firstName = "David"
-
+  const [ searchHistories, setSearchHistory ] = useState([])
   const [ location, setLocation ] = useState('')
   const [ weather, setWeather ] = useState({})
 
+  function addSearchToSearchHistory (location, result) {
+    let singleSearchHistory = {
+      term: location,
+      result: result
+    }
+
+    // Make a copy of the search history in state and fill it 
+    // with the previous 4 searches
+    let tempSearchHistories = searchHistories
+
+    // Add single search to the beginning of the list
+    tempSearchHistories.unshift(singleSearchHistory)
+
+    // Check if the list is more than 5 elements
+    // If it is, remove the last element
+    if (tempSearchHistories.length > 5) {
+      tempSearchHistories = tempSearchHistories.slice(0, 5)
+    }
+
+    // update my search history list with this new array (5 most recent searches)
+    setSearchHistory(tempSearchHistories)
+
+    let userObject = props.userData
+    userObject.history = tempSearchHistories
+    props.updateUser(userObject)
+  }
+  
   const handleSearch = (e) => {
     e.preventDefault()
+    
+    let searchTerm = location
 
     fetch(`${server}weather?q=${location}&units=metric&APPID=${key}`)
     .then((res) => res.json())
     .then((result) => {
-        console.log(result)
-        setLocation('')
-        setWeather(result)
+      setLocation('')
+      setWeather(result)
+      
+      if (props.userData) {
+        addSearchToSearchHistory(searchTerm, result)
+      }
     })
   }
 
@@ -42,6 +73,12 @@ function Home(props) {
     },
     []
   )
+
+  useEffect(function () {
+    if (props.userData) {
+      setSearchHistory(props.userData.history)
+    }
+  }, [props.userData])
 
   return (
     <div className="app">

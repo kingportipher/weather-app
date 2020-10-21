@@ -22,7 +22,8 @@ function Login (props) {
     // ...
     const userData = {
       name: "David Lartey",
-      location: "Accra"
+      location: "Accra",
+      history: []
     }
 
     // After login, set the userData to the data of our new user

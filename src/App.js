@@ -3,6 +3,7 @@ import { Switch, Route, Link } from 'react-router-dom'
 import Home from './components/home/Home'
 import Signup from './components/signup/Signup'
 import Login from './components/login/login'
+import Profile from './components/auth/profile'
 
 function App() {
   const [userData, setUserData] = useState(false)
@@ -17,9 +18,13 @@ function App() {
       <Link to='/'> Home </Link>
       {
         userData ?
-          <button onClick={e => updateLoggedInUserInfo(false)}>
-            Logout
-          </button>
+          <div>
+
+            <Link to='/profile'> Profile </Link>
+            <button onClick={e => updateLoggedInUserInfo(false)}>
+              Logout
+            </button>
+          </div>
           :
           <div>
             <Link to='/login'> Login </Link>
@@ -29,7 +34,8 @@ function App() {
 
       <Switch>
         <Route exact path='/'>
-          <Home userData={userData} />
+          <Home userData={userData}
+            updateUser={updateLoggedInUserInfo} />
         </Route>
 
         <Route exact path='/signup'>
@@ -39,6 +45,10 @@ function App() {
         <Route exact path='/login'>
           <Login userData={userData}
             updateUser={updateLoggedInUserInfo} />
+        </Route>
+
+        <Route exact path='/profile'>
+          <Profile userData={userData} />
         </Route>
       </Switch>
 
