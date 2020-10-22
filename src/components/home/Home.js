@@ -111,7 +111,7 @@ function Home(props) {
                 <h3> temperature <br/> <span>{Math.round(weather.main.temp)} &deg;C</span> </h3>
               </div>
               <div className="weather">
-                <h3> weather <br/> <span>{weather.weather[0].main}</span> </h3>npm install
+                <h3> weather <br/> <span>{weather.weather[0].main}</span> </h3>
               </div>
             </div>
           </div>

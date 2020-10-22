@@ -14,7 +14,7 @@ function App() {
 
   return(
     <div className='app'>
-      
+     <div className='menu' >
       <Link to='/'> Home </Link>
       {
         userData ?
@@ -26,12 +26,12 @@ function App() {
             </button>
           </div>
           :
-          <div>
+          <div className='cond-render'>
             <Link to='/login'> Login </Link>
             <Link to='/signup'> Sign Up </Link>
           </div>
       }
-
+      </div>
       <Switch>
         <Route exact path='/'>
           <Home userData={userData}

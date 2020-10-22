@@ -1,0 +1,16 @@
+.login {
+ padding: 20px;
+ width: 500px;
+}
+
+.login > form {
+ width: 300px;
+ margin: 0 auto;
+}
+
+form > * {
+ width: 100%;
+ font-size: 1.5em;
+ color: orange;
+ margin: 10px auto;
+}

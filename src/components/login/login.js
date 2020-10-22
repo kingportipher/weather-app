@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import styles from './login.module.css'
 
 function Login (props) {
   const history = useHistory()
@@ -33,24 +34,19 @@ function Login (props) {
   }
 
   return (
-    <div>
+    <div className={styles.login}>
       <form>
-        <div>
-          <label>Email</label>
-          <input type="email" id="email-box" value={email}
-            onChange={e => setEmail(e.target.value)} />
-        </div>
-        <div>
-          <label>Password</label>
-          <input type="password" value={password}
-            onChange={e => setPassword(e.target.value)} />
-        </div>
-        <div>
-          <button type="submit"
-            onClick={handleLogin}>
-            Login
-          </button>
-        </div>
+        {/* <label>Email</label> */}
+        <input type="email" id="email-box" value={email}
+          onChange={e => setEmail(e.target.value)} />
+        {/* <label>Password</label> */}
+        <input type="password" value={password}
+          onChange={e => setPassword(e.target.value)} />
+
+        <button type="submit"
+          onClick={handleLogin}>
+          Login
+        </button>
       </form>
     </div>
   )
