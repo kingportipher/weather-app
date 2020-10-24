@@ -22,7 +22,7 @@ function Login (props) {
     // Attempt login here probably via an API
     // ...
     const userData = {
-      name: "David Lartey",
+      name: "Victor Abrokwah",
       location: "Accra",
       history: []
     }
@@ -37,10 +37,10 @@ function Login (props) {
     <div className={styles.login}>
       <form>
         {/* <label>Email</label> */}
-        <input type="email" id="email-box" value={email}
+        <input type="email" placeholder="Enter Email" id="email-box" value={email}
           onChange={e => setEmail(e.target.value)} />
         {/* <label>Password</label> */}
-        <input type="password" value={password}
+        <input type="password" placeholder="Password" value={password}
           onChange={e => setPassword(e.target.value)} />
 
         <button type="submit"

@@ -120,11 +120,11 @@ function Home(props) {
             {
               props.userData ?
               <h1 className='null-void'>
-                Hello {props.userData.name}, welcome to our weather app
+                Hello {props.userData.name}, Welcome to The Weather App
               </h1>
               :
               <h1 className='null-void'>
-                Hello, <Link to="/login">Log in</Link> to our weather app
+                Hello, <Link to="/login">Log in</Link> to The Weather App
               </h1>
             }
             <h1 className='null-void'> Search a city to get weather details </h1>
